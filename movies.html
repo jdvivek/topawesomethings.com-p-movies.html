@@ -72,7 +72,7 @@
             { 
                //set current url
                document.getElementById('playFromURL').href=murl;
-               document.getElementById('playFromURL').style.display="block";
+               document.getElementById('playFromURL').style.visibility="visible";
                
                 document.getElementById('playFromURL').click();
               
@@ -127,7 +127,7 @@
 			<a class="movieLink btn btn-default customBtn homebutton" href="https://www.topawesomethings.com/" style="color: black; float: left;" title="Go To Home Page (https://www.topawesomethings.com/)">Home</a>
 			<span class="customheadingMovie" title="This Website Works Fine in Google Chrome Browser, Chrome Browser is recommended For this Website, So Please Install Google Chrome and open it in Google Chrome Browser.">All Movies</span>
           
-       			<a class="movieLink btn btn-default customBtn" href="#" id="playFromURL" style="display: none;" title="This is the first Page You Opened" onclick="startMovie(event)">Your URL</a>
+       			<a class="movieLink btn btn-default customBtn" href="#" id="playFromURL"  title="This is the first Page You Opened" onclick="startMovie(event)" style="visibility:hidden">Your URL</a>
           
 			<a class="movieLink btn btn-default customBtn" href="https://yifymovies.tv" id="defaultMovieLink" title="This Website Works Fine in Google Chrome Browser, Chrome Browser is recommended For this Website, So Please Install Google Chrome and open it in Google Chrome Browser." onclick="startMovie(event)">English</a>
 			<a class="movieLink btn btn-default active customBtn" href="https://rdxhd1.kim/" title="This Website Works Fine in Google Chrome Browser, Chrome Browser is recommended For this Website, So Please Install Google Chrome and open it in Google Chrome Browser." onclick="startMovie(event)">Hindi</a>
