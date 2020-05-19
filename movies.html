@@ -1,0 +1,107 @@
+<div dir="ltr" style="text-align: left;" trbidi="on">
+There are some steps for Seo<br />
+<br />
+<b>Step 1&nbsp;</b><br />
+<b><span style="color: #274e13;">&nbsp; Add Url on Inspection box then click on&nbsp; request to add&nbsp;</span></b><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<a href="https://search.google.com/search-console">Add Link To Google</a><br />
+<br />
+
+<div>
+
+<fieldset id="geneateURlSection" style="border: 1px dotted; padding: 10px;">
+<legend>Generate URL from Title</legend>
+Enter Title <input id="cbmurl" type="text" /> <br />
+<input onclick="makepermanenturl()" type="button" value="Geneate Url" /><br />
+Generate Url : <input id="cbmgurl" type="text" />
+
+
+<script type="text/javascript">
+
+function makepermanenturl()
+{
+ var str=document.getElementById('cbmurl').value;
+ var cbmodifystr=str.trim().toLowerCase().replace(/ /g,"-");
+ document.getElementById('cbmgurl').value=cbmodifystr;
+return cbmodifystr;
+}
+
+</script>
+</fieldset>
+
+<!--For Gernerating Sort Url-->
+<fieldset id="geneatesortURlSection" style="border: 1px dotted; padding: 10px;">
+<legend>Generate Short Url from url</legend>
+Enter URL <input id="cshortbmurl" type="text" /> <br />
+<input onclick="makeShorturl()" type="button" value="Geneate Url" /><br />
+<a id="shorturllink"></a> <br />
+Generate Url : <input id="cshortbmgurl" type="text" />
+<br />
+
+<script type="text/javascript">
+
+function makeShorturl()
+{
+ var str=document.getElementById('cshortbmurl').value;
+
+ var fixurl='https://www.topawesomethings.com/p/uc.html?u='+str;
+ document.getElementById('cshortbmgurl').value=fixurl;
+ var copyText = document.getElementById('cshortbmgurl');
+ copyText.select();
+ copyText.setSelectionRange(0, 99999)
+ document.execCommand("copy");
+document.getElementById('shorturllink').href=fixurl;
+document.getElementById('shorturllink').innerText=fixurl;
+
+
+
+}
+ document.getElementById('cshortbmgurl').value="";
+<!--For Gernerating Sort Url-->
+</script>
+</fieldset>
+
+  
+ <!--For Gernerating Movie  Url-->
+<fieldset id="geneateMovieURLSection" style="border: 1px dotted; padding: 10px;">
+<legend>Generate Movie URL</legend>
+Enter URL <input id="cMoviemurl" type="text" /> <br />
+<input onclick="makeShorturl()" type="button" value="Geneate Url" /><br />
+<a id="shortMovielink" target="_blank"></a> <br />
+Generate Url : <input id="cMoviegmurl" type="text" />
+<br />
+
+<script type="text/javascript">
+
+function makeShorturl()
+{
+ var str=document.getElementById('cMoviemurl').value;
+
+ var fixurl='https://www.topawesomethings.com/p/movies.html?u='+str;
+ document.getElementById('cMoviegmurl').value=fixurl;
+ var copyText = document.getElementById('cMoviegmurl');
+ copyText.select();
+ copyText.setSelectionRange(0, 99999)
+ document.execCommand("copy");
+document.getElementById('shortMovielink').href=fixurl;
+document.getElementById('shortMovielink').innerText=fixurl;
+
+
+
+}
+ document.getElementById('cMoviemurl').value="";
+<!--For Gernerating Sort Url-->
+</script>
+</fieldset>
+
+
+  
+
+  
+  
+  
+
+
+</div>
+
+<b>Step 2</b><br />
+<br /></div>
