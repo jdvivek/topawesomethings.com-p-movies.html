@@ -1,107 +1,149 @@
 <div dir="ltr" style="text-align: left;" trbidi="on">
-There are some steps for Seo<br />
-<br />
-<b>Step 1&nbsp;</b><br />
-<b><span style="color: #274e13;">&nbsp; Add Url on Inspection box then click on&nbsp; request to add&nbsp;</span></b><br />
-&nbsp; &nbsp; &nbsp; &nbsp;<a href="https://search.google.com/search-console">Add Link To Google</a><br />
-<br />
+	<script>
+	document.getElementsByTagName("body")[0].style.visibility = "hidden";
+	</script>
+	<div dir="ltr" style="text-align: left;" trbidi="on">
+		<!--Clear Page Start-->
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"></link>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+		$(document).ready(function() {
+			document.getElementsByTagName("body")[0].style.visibility = "visible"
+			document.getElementsByTagName('body')[0].innerHTML = document.getElementsByClassName("post-body")[0].innerHTML;
+          ////PLAY MOVIES ON PAGE OPEN
+			PlayMovieFromURLOrDefault();
+		});
+		//global variable for store current  Link
+		var currentClickMovieLink = null;
+		var blockedUrls = "https://yifymovies.tv/";
 
-<div>
+		function startMovie(event) {
+			//show spinner
+			ShowHideSpinner(true);
+			//check new tab will open or not if websites is blocked new tab will open
+			currentClickMovieLink = event.target;
+			if(currentClickMovieLink.getAttribute("unblocked") == null) {
+				event.preventDefault();
+				document.getElementById('movieframe').src = $(currentClickMovieLink).attr("href");
+			} else {
+				setTimeout(function() {
+					$(currentClickMovieLink).attr("target", "movieframe");
+					$(currentClickMovieLink).removeAttr("unblocked");
+				}, 1000);
+				setTimeout(function() {
+					document.getElementById('movieframe').src = $(currentClickMovieLink).attr("href");
+				}, 2000);
+			}
+			//make active or inactive
+			$(".movieLink").removeClass("active");
+			$(event.currentTarget).addClass("active");
+		}
 
-<fieldset id="geneateURlSection" style="border: 1px dotted; padding: 10px;">
-<legend>Generate URL from Title</legend>
-Enter Title <input id="cbmurl" type="text" /> <br />
-<input onclick="makepermanenturl()" type="button" value="Geneate Url" /><br />
-Generate Url : <input id="cbmgurl" type="text" />
+		function onMovieFrameLoad() {
+			ShowHideSpinner(false);
+			if(document.getElementById("movieframe").contentWindow.window.length == 0 && blockedUrls.indexOf(document.getElementById('movieframe').src) != -1) {
+				setTimeout(function() {
+					currentClickMovieLink.click();
+				}, 1000);
+			}
+		}
 
+		function ShowHideSpinner(isShow) {
+			if(isShow) {
+				//show spinner
+				$("#movieloadingspinner").show();
+				$("#movieframe").hide();
+				$("#contentWarning").hide();
+			} else {
+				$("#movieloadingspinner").hide();
+				$("#movieframe").show();
+				$("#contentWarning").show();
+			}
+		}
+           /*Start Movie From Url*/ 
+          function  PlayMovieFromURLOrDefault()
+          {
+         
+            var url = new URL(window.location);
+            var murl = url.searchParams.get("u")
+            //check url is coming or not
+            if(murl!=null)
+            { 
+               //set current url
+               document.getElementById('playFromURL').href=murl;
+               document.getElementById('playFromURL').style.display="block";
+               
+                document.getElementById('playFromURL').click();
+              
+            }
+            else
+            {
+              document.getElementById('defaultMovieLink').click();
+            }
+            
+          }
+		</script>
+		<style>
+		#movieframe {
+			height: 900px;
+		}
 
-<script type="text/javascript">
+		.customBtn {
+			cursor: pointer;
+		}
 
-function makepermanenturl()
-{
- var str=document.getElementById('cbmurl').value;
- var cbmodifystr=str.trim().toLowerCase().replace(/ /g,"-");
- document.getElementById('cbmgurl').value=cbmodifystr;
-return cbmodifystr;
-}
+		.customheadingMovie {
+			font-size: 18px;
+			font-family: montserrat;
+			font-weight: 400;
+			display: inline-block;
+			padding: 0 20px;
+			height: 40px;
+			line-height: 40px;
+			background: #79c142;
+			color: #fff;
+			border-radius: 3px 3px 0 0;
+			float: left;
+		}
 
-</script>
-</fieldset>
-
-<!--For Gernerating Sort Url-->
-<fieldset id="geneatesortURlSection" style="border: 1px dotted; padding: 10px;">
-<legend>Generate Short Url from url</legend>
-Enter URL <input id="cshortbmurl" type="text" /> <br />
-<input onclick="makeShorturl()" type="button" value="Geneate Url" /><br />
-<a id="shorturllink"></a> <br />
-Generate Url : <input id="cshortbmgurl" type="text" />
-<br />
-
-<script type="text/javascript">
-
-function makeShorturl()
-{
- var str=document.getElementById('cshortbmurl').value;
-
- var fixurl='https://www.topawesomethings.com/p/uc.html?u='+str;
- document.getElementById('cshortbmgurl').value=fixurl;
- var copyText = document.getElementById('cshortbmgurl');
- copyText.select();
- copyText.setSelectionRange(0, 99999)
- document.execCommand("copy");
-document.getElementById('shorturllink').href=fixurl;
-document.getElementById('shorturllink').innerText=fixurl;
-
-
-
-}
- document.getElementById('cshortbmgurl').value="";
-<!--For Gernerating Sort Url-->
-</script>
-</fieldset>
-
-  
- <!--For Gernerating Movie  Url-->
-<fieldset id="geneateMovieURLSection" style="border: 1px dotted; padding: 10px;">
-<legend>Generate Movie URL</legend>
-Enter URL <input id="cMoviemurl" type="text" /> <br />
-<input onclick="makeShorturl()" type="button" value="Geneate Url" /><br />
-<a id="shortMovielink" target="_blank"></a> <br />
-Generate Url : <input id="cMoviegmurl" type="text" />
-<br />
-
-<script type="text/javascript">
-
-function makeShorturl()
-{
- var str=document.getElementById('cMoviemurl').value;
-
- var fixurl='https://www.topawesomethings.com/p/movies.html?u='+str;
- document.getElementById('cMoviegmurl').value=fixurl;
- var copyText = document.getElementById('cMoviegmurl');
- copyText.select();
- copyText.setSelectionRange(0, 99999)
- document.execCommand("copy");
-document.getElementById('shortMovielink').href=fixurl;
-document.getElementById('shortMovielink').innerText=fixurl;
-
-
-
-}
- document.getElementById('cMoviemurl').value="";
-<!--For Gernerating Sort Url-->
-</script>
-</fieldset>
-
-
-  
-
-  
-  
-  
-
-
+		.homebutton {
+			font-size: 18px;
+			font-family: montserrat;
+			background: #e6e6e6;
+			background-color: #e6e6e6;
+			font-weight: 400;
+			display: inline-block;
+			padding: 0 20px;
+			height: 40px;
+			line-height: 40px;
+			color: #000000;
+			border-radius: 3px 3px 0 0;
+			float: left;
+		}
+		</style>
+	
+		<center>
+			<a class="movieLink btn btn-default customBtn homebutton" href="https://www.topawesomethings.com/" style="color: black; float: left;" title="Go To Home Page (https://www.topawesomethings.com/)">Home</a>
+			<span class="customheadingMovie" title="This Website Works Fine in Google Chrome Browser, Chrome Browser is recommended For this Website, So Please Install Google Chrome and open it in Google Chrome Browser.">All Movies</span>
+          
+       			<a class="movieLink btn btn-default customBtn" href="#" id="playFromURL" style="display: none;" title="This is the first Page You Opened" onclick="startMovie(event)">Your URL</a>
+          
+			<a class="movieLink btn btn-default customBtn" href="https://yifymovies.tv" id="defaultMovieLink" title="This Website Works Fine in Google Chrome Browser, Chrome Browser is recommended For this Website, So Please Install Google Chrome and open it in Google Chrome Browser." onclick="startMovie(event)">English</a>
+			<a class="movieLink btn btn-default active customBtn" href="https://rdxhd1.kim/" title="This Website Works Fine in Google Chrome Browser, Chrome Browser is recommended For this Website, So Please Install Google Chrome and open it in Google Chrome Browser." onclick="startMovie(event)">Hindi</a>
+          
+          
+			<!--<a class="movieLink btn btn-default customBtn" href="https://swefilmer.to/" href="https://yifymovies.tv/" onclick="startMovie(event)" target="_Blank" title="This Website Works Fine in Google Chrome Browser, Chrome Browser is recommended For this Website, So Please Install Google Chrome and open it in Google Chrome Browser." unblocked="">English 2</a> --->
+			<a class="movieLink btn btn-default customBtn" href="https://amzn.to/2GtwRZA" target="_Blank" title="Get 70% Pecentage Discount on Amazon by Using Shopping With Us. It Will open new tab for shopping on amazon.">70% Discount on Amazon Sale</a>
+		</center>
+		<hr />
+		<center>
+			<h3 id="movieloadingspinner"> Loading... </h3>
+			<iframe allowfullscreen="" frameborder="0" id="movieframe" marginheight="0" marginwidth="0" name="movieframe" onload="onMovieFrameLoad(this)" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-same-origin allow-scripts" scrolling="auto" seamless="seamless" width="100%">></iframe>
+		</center>
+		<center>
+			<b style="font-size: medium;"><br /></b><span style="font-size: small;"></span><b style="font-size: medium;">
+				<span id="contentWarning" style="color: #0b5394;"> Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties. We have just embedded websites. </span></b><br />
+		</center>
+	</div>
 </div>
-
-<b>Step 2</b><br />
-<br /></div>
